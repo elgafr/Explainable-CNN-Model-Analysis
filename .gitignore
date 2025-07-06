@@ -4,6 +4,11 @@ data/datasets/HAM10000/images/*.jpeg
 data/datasets/HAM10000/images/*.JPG
 data/datasets/HAM10000/images/*.JPEG
 data/datasets/HAM10000/organized_ham10000/*/*.jpg
+data/datasets/HAM10000/organized_ham10000/benign/*.jpg
+data/datasets/HAM10000/organized_ham10000/malignant/*.jpg
+!data/datasets/HAM10000/images/
+!data/datasets/HAM10000/organized_ham10000/benign
+!data/datasets/HAM10000/organized_ham10000/malignant
 
 # Ignore all image files in images directory (alternative)
 # data/datasets/*/images/*.jpg
