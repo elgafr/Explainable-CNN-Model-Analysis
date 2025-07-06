@@ -1,0 +1,107 @@
+# Configuration file for Explainable CNN Analysis
+# Skin Cancer Detection using Grad-CAM and SHAP
+
+# Model Configuration
+model:
+  path: "../models/SkinCancerDetectionModel.h5"
+  type: "keras"  # keras, pytorch
+  input_shape: [224, 224, 3]
+  num_classes: 2
+  target_layers:
+    - "conv5_block3_out"
+    - "conv5_block2_out"
+    - "conv5_block1_out"
+
+# Data Configuration
+data:
+  image_size: [224, 224]
+  batch_size: 32
+  normalization: "imagenet"  # imagenet, custom, none
+  augmentation:
+    rotation_range: 20
+    width_shift_range: 0.2
+    height_shift_range: 0.2
+    horizontal_flip: true
+    vertical_flip: false
+    zoom_range: 0.2
+
+# Grad-CAM Configuration
+grad_cam:
+  target_layer: "conv5_block3_out"
+  alpha: 0.4  # Overlay transparency
+  colormap: "jet"
+  save_heatmaps: true
+  save_overlays: true
+  output_dir: "../results/gradcam"
+
+# SHAP Configuration
+shap:
+  background_samples: 100
+  max_evals: 500
+  nsamples: 100
+  save_explanations: true
+  output_dir: "../results/shap"
+
+# Visualization Configuration
+visualization:
+  figure_size: [15, 10]
+  dpi: 300
+  save_format: "png"
+  colormaps:
+    heatmap: "jet"
+    overlay: "viridis"
+  interactive: true
+
+# Analysis Configuration
+analysis:
+  batch_size: 16
+  num_samples: 100
+  random_seed: 42
+  save_results: true
+  output_dir: "../results/analysis"
+
+# Evaluation Configuration
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "auc"
+  cross_validation_folds: 5
+  confidence_threshold: 0.5
+
+# Output Configuration
+output:
+  base_dir: "../results"
+  create_subdirs: true
+  save_plots: true
+  save_metrics: true
+  save_models: false
+  format: "json"  # json, csv, pickle
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "../logs/analysis.log"
+  console: true
+
+# Hardware Configuration
+hardware:
+  gpu_memory_growth: true
+  mixed_precision: false
+  num_workers: 4
+  device: "auto"  # auto, cpu, gpu
+
+# Class Names (for skin cancer detection)
+classes:
+  0: "benign"
+  1: "malignant"
+
+# Color Schemes
+colors:
+  benign: "#2E8B57"  # Sea Green
+  malignant: "#DC143C"  # Crimson
+  heatmap: "jet"
+  overlay: "viridis" 
